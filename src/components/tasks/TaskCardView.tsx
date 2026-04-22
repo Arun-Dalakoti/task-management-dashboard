@@ -19,15 +19,20 @@ export function TaskCardView({
       className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3"
       aria-label="Tasks in card layout"
     >
-      {tasks.map((task) => (
-        <TaskItem
+      {tasks.map((task, index) => (
+        <div
           key={task.id}
-          task={task}
-          onToggleCompleted={onToggleCompleted}
-          onEditTask={onEditTask}
-          onRequestDeleteTask={onRequestDeleteTask}
-          variant="card"
-        />
+          className="task-card-enter min-h-0"
+          style={{ animationDelay: `${index * 60}ms` }}
+        >
+          <TaskItem
+            task={task}
+            onToggleCompleted={onToggleCompleted}
+            onEditTask={onEditTask}
+            onRequestDeleteTask={onRequestDeleteTask}
+            variant="card"
+          />
+        </div>
       ))}
     </div>
   );

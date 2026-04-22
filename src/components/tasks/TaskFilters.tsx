@@ -134,13 +134,19 @@ export function TaskFilters({
         </div>
       </div>
 
-      {open ? (
-        <div
-          id={panelId}
-          role="region"
-          aria-label="Filter options"
-          className="absolute left-0 right-0 top-full z-30 mt-2 max-h-[min(70vh,28rem)] overflow-y-auto rounded-xl border border-border bg-elevated p-3 shadow-lg ring-1 ring-subtle sm:left-auto sm:right-0 sm:w-96"
-        >
+      <div
+        id={panelId}
+        role="region"
+        aria-label="Filter options"
+        aria-hidden={!open}
+        inert={!open}
+        className={[
+          "absolute left-0 right-0 top-full z-30 mt-2 max-h-[min(70vh,28rem)] origin-top overflow-y-auto rounded-xl border border-border bg-elevated p-3 shadow-lg ring-1 ring-subtle transition-[transform,opacity,visibility] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:left-auto sm:right-0 sm:w-96",
+          open
+            ? "visible translate-y-0 scale-100 opacity-100"
+            : "invisible pointer-events-none -translate-y-2 scale-[0.98] opacity-0",
+        ].join(" ")}
+      >
           <div className="grid gap-4">
             <div>
               <span className={filterGroupTitle} id={`${panelId}-status`}>
@@ -216,7 +222,6 @@ export function TaskFilters({
             ) : null}
           </div>
         </div>
-      ) : null}
     </div>
   );
 }

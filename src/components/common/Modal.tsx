@@ -1,7 +1,10 @@
 import {
+  useCallback,
   useEffect,
   useId,
   useRef,
+  useState,
+  type AnimationEvent,
   type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
@@ -17,34 +20,56 @@ export type ModalProps = {
 export function Modal({ isOpen, title, onClose, children }: ModalProps) {
   const titleId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (isOpen) {
+      setMounted(true);
+      setExiting(false);
+    } else if (mounted) {
+      setExiting(true);
+    }
+  }, [isOpen, mounted]);
+
+  useEffect(() => {
+    if (!mounted) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prev;
     };
-  }, [isOpen]);
+  }, [mounted]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!mounted || exiting) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [isOpen, onClose]);
+  }, [mounted, exiting, onClose]);
 
   useEffect(() => {
-    if (!isOpen || !panelRef.current) return;
+    if (!mounted || exiting || !isOpen || !panelRef.current) return;
     const el = panelRef.current.querySelector<HTMLElement>(
       'input:not([type="hidden"]), select, textarea, button:not([aria-hidden="true"])'
     );
     window.requestAnimationFrame(() => el?.focus());
-  }, [isOpen]);
+  }, [mounted, exiting, isOpen]);
 
-  if (!isOpen) return null;
+  const onPanelAnimationEnd = useCallback((e: AnimationEvent<HTMLDivElement>) => {
+    if (e.target !== e.currentTarget) return;
+    if (exiting) {
+      setMounted(false);
+      setExiting(false);
+    }
+  }, [exiting]);
+
+  if (!mounted) return null;
+
+  const backdropAnim = exiting ? "modal-backdrop-exit" : "modal-backdrop-enter";
+  const shellAnim = exiting ? "modal-shell-exit" : "modal-shell-enter";
 
   return createPortal(
     <div
@@ -53,7 +78,10 @@ export function Modal({ isOpen, title, onClose, children }: ModalProps) {
     >
       <button
         type="button"
-        className="absolute inset-0 bg-overlay backdrop-blur-[1px] transition-opacity"
+        className={[
+          "absolute inset-0 bg-overlay backdrop-blur-[1px]",
+          backdropAnim,
+        ].join(" ")}
         aria-label="Close dialog"
         onClick={onClose}
       />
@@ -62,7 +90,11 @@ export function Modal({ isOpen, title, onClose, children }: ModalProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="relative z-10 flex max-h-[92dvh] w-full max-w-lg flex-col rounded-t-2xl border border-border bg-elevated shadow-2xl sm:max-h-[85dvh] sm:rounded-2xl"
+        onAnimationEnd={onPanelAnimationEnd}
+        className={[
+          "relative z-10 flex max-h-[92dvh] w-full max-w-lg flex-col rounded-t-2xl border border-border bg-elevated shadow-2xl sm:max-h-[85dvh] sm:rounded-2xl",
+          shellAnim,
+        ].join(" ")}
       >
         <div className="flex shrink-0 items-start justify-between gap-3 border-b border-border px-4 py-4 sm:px-6">
           <h2

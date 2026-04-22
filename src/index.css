@@ -230,6 +230,142 @@
   .toast-sheen-bar {
     display: none;
   }
+
+  .modal-backdrop-enter,
+  .modal-backdrop-exit,
+  .modal-shell-enter,
+  .modal-shell-exit,
+  .task-card-enter {
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Modal: backdrop + shell (see Modal.tsx mounted / exiting) */
+@keyframes modal-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-backdrop-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-shell-in-mobile {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+}
+
+@keyframes modal-shell-out-mobile {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+    filter: blur(6px);
+  }
+}
+
+@keyframes modal-shell-in-desktop {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.85rem, 0) scale(0.94) rotate(-0.35deg);
+    filter: blur(6px);
+  }
+  70% {
+    opacity: 1;
+    transform: translate3d(0, -0.12rem, 0) scale(1.01) rotate(0.12deg);
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+@keyframes modal-shell-out-desktop {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 0.5rem, 0) scale(0.96);
+    filter: blur(5px);
+  }
+}
+
+.modal-backdrop-enter {
+  animation: modal-backdrop-in 0.32s ease-out both;
+}
+
+.modal-backdrop-exit {
+  animation: modal-backdrop-out 0.28s ease-in both;
+}
+
+.modal-shell-enter {
+  animation: modal-shell-in-mobile 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.modal-shell-exit {
+  animation: modal-shell-out-mobile 0.34s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@media (min-width: 640px) {
+  .modal-shell-enter {
+    animation: modal-shell-in-desktop 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .modal-shell-exit {
+    animation: modal-shell-out-desktop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
+/* Task cards: staggered entrance (TaskCardView) */
+@keyframes task-card-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.25rem, 0) scale(0.94) rotate(-0.4deg);
+    filter: blur(5px);
+  }
+  55% {
+    opacity: 1;
+    transform: translate3d(0, -0.2rem, 0) scale(1.02) rotate(0.2deg);
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+.task-card-enter {
+  animation: task-card-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 
 .toast-surface {

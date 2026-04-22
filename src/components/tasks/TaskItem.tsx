@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Task } from "../../types/task";
 import { TASK_PRIORITY_LABELS, getTaskStatusLabel } from "../../types/task";
 import {
@@ -13,6 +14,9 @@ type TaskItemProps = {
   onEditTask: (task: Task) => void;
   onRequestDeleteTask: (task: Task) => void;
   variant: "list" | "card";
+  /** Card layout: entrance animation class (e.g. `task-card-enter`) + optional delay on `style`. */
+  entranceClassName?: string;
+  entranceStyle?: CSSProperties;
 };
 
 export function TaskItem({
@@ -21,6 +25,8 @@ export function TaskItem({
   onEditTask,
   onRequestDeleteTask,
   variant,
+  entranceClassName = "",
+  entranceStyle,
 }: TaskItemProps) {
   const statusLabel = getTaskStatusLabel(task);
 
@@ -162,8 +168,12 @@ export function TaskItem({
       <article
         className={[
           taskCardBaseClass(task.completed, task.priority, "card"),
-          "flex h-full flex-col p-4 sm:p-5",
-        ].join(" ")}
+          "flex h-full min-h-0 flex-col p-4 sm:p-5",
+          entranceClassName,
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        style={entranceStyle}
       >
         <div className="flex min-h-0 flex-1 flex-col gap-0">
           {body}
@@ -174,7 +184,7 @@ export function TaskItem({
   }
 
   return (
-    <div className="py-1">
+    <div className="min-w-0">
       {body}
       {editBar}
     </div>

@@ -20,19 +20,16 @@ export function TaskCardView({
       aria-label="Tasks in card layout"
     >
       {tasks.map((task, index) => (
-        <div
+        <TaskItem
           key={task.id}
-          className="task-card-enter min-h-0"
-          style={{ animationDelay: `${index * 60}ms` }}
-        >
-          <TaskItem
-            task={task}
-            onToggleCompleted={onToggleCompleted}
-            onEditTask={onEditTask}
-            onRequestDeleteTask={onRequestDeleteTask}
-            variant="card"
-          />
-        </div>
+          task={task}
+          onToggleCompleted={onToggleCompleted}
+          onEditTask={onEditTask}
+          onRequestDeleteTask={onRequestDeleteTask}
+          variant="card"
+          entranceClassName="task-card-enter"
+          entranceStyle={{ animationDelay: `${index * 60}ms` }}
+        />
       ))}
     </div>
   );

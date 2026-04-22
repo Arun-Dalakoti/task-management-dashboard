@@ -6,5 +6,6 @@ export { FunnelIcon } from "./FunnelIcon";
 export { GridViewIcon } from "./GridViewIcon";
 export { ListViewIcon } from "./ListViewIcon";
 export { MoonIcon } from "./MoonIcon";
+export { SearchIcon } from "./SearchIcon";
 export { SunIcon } from "./SunIcon";
 export type { IconProps } from "./types";

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Button } from "./components/common/Button";
 import { useToast } from "./components/common";
 import { ConfirmDialog } from "./components/common/ConfirmDialog";
@@ -38,15 +38,13 @@ function App() {
     status: "all",
     priority: "all",
   });
-  const createModalKeySeq = useRef(0);
-  const [createModalKey, setCreateModalKey] = useState<number | null>(null);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const taskLayoutMode: "list" | "card" =
     isWideLayout && mode === "card" ? "card" : "list";
 
   const openCreateTaskModal = () => {
-    createModalKeySeq.current += 1;
-    setCreateModalKey(createModalKeySeq.current);
+    setIsCreateModalOpen(true);
   };
 
   const filteredTasks = filterTasks(tasks, filters);
@@ -163,9 +161,8 @@ function App() {
       </main>
 
       <TaskCreateModal
-        isOpen={createModalKey !== null}
-        onClose={() => setCreateModalKey(null)}
-        formKey={createModalKey ?? 0}
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
         onCreateTask={handleAddTask}
       />
 

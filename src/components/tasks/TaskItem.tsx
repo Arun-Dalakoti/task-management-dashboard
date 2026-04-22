@@ -37,17 +37,31 @@ export function TaskItem({
       <div className="min-w-0 flex-1">
         <h3
           className={[
-            "text-base font-semibold text-fg",
-            task.completed ? "line-through opacity-70" : "",
+            "text-base font-semibold transition-colors",
+            task.completed
+              ? "text-fg-muted line-through decoration-fg-muted decoration-2 opacity-80"
+              : "text-fg",
           ].join(" ")}
         >
           {task.title}
         </h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">
+        <p
+          className={[
+            "mt-1.5 text-sm leading-relaxed transition-colors",
+            task.completed
+              ? "text-fg-subtle line-through decoration-fg-subtle/60 opacity-75"
+              : "text-fg-muted",
+          ].join(" ")}
+        >
           {task.description ? (
             task.description
           ) : (
-            <span className="italic text-fg-subtle">
+            <span
+              className={[
+                "italic",
+                task.completed ? "text-fg-subtle/80" : "text-fg-subtle",
+              ].join(" ")}
+            >
               No description
             </span>
           )}
@@ -58,8 +72,9 @@ export function TaskItem({
             <dd>
               <span
                 className={[
-                  "inline-flex items-center rounded-full px-2.5 py-0.5 font-medium",
+                  "inline-flex items-center rounded-full px-2.5 py-0.5 font-medium transition-opacity",
                   priorityBadgeClass(task.priority),
+                  task.completed ? "opacity-75" : "",
                 ].join(" ")}
               >
                 {TASK_PRIORITY_LABELS[task.priority]}
@@ -69,21 +84,29 @@ export function TaskItem({
             <dd>
               <span
                 className={[
-                  "inline-flex items-center rounded-full px-2.5 py-0.5 font-medium",
+                  "inline-flex items-center rounded-full px-2.5 py-0.5 font-medium ring-1 ring-inset transition-colors",
                   task.completed
-                    ? "bg-success-bg text-success-fg"
-                    : "bg-warning-bg text-warning-fg",
+                    ? "bg-success-bg text-success-fg ring-success-accent/35"
+                    : "bg-warning-bg text-warning-fg ring-warning-fg/20",
                 ].join(" ")}
               >
                 {statusLabel}
               </span>
             </dd>
           </div>
-          <div className="flex items-center gap-1.5 text-fg-muted">
-            <dt className="font-medium text-fg-subtle">
-              Due
-            </dt>
-            <dd className="font-normal tabular-nums">
+          <div
+            className={[
+              "flex items-center gap-1.5 tabular-nums transition-opacity",
+              task.completed ? "text-fg-subtle opacity-70" : "text-fg-muted",
+            ].join(" ")}
+          >
+            <dt className="font-medium text-fg-subtle">Due</dt>
+            <dd
+              className={[
+                "font-normal",
+                task.completed ? "line-through decoration-fg-subtle/50" : "",
+              ].join(" ")}
+            >
               {formatDueDate(task.dueDate)}
             </dd>
           </div>

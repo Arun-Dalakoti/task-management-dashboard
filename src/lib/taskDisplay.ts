@@ -40,7 +40,17 @@ function taskCardPriorityBorder(priority: TaskPriority): string {
   }
 }
 
-/** List layout: no side accent. Card layout: left accent by task priority. */
+/** List row: color + left accent so completed vs pending scans quickly. */
+export function taskListRowClass(completed: boolean): string {
+  return [
+    "border-l-4 transition-colors",
+    completed
+      ? "border-l-success-accent bg-success-bg/25 dark:bg-success-bg/15"
+      : "border-l-transparent",
+  ].join(" ");
+}
+
+/** Card layout: priority accent + stronger complete vs pending visuals. */
 export function taskCardBaseClass(
   completed: boolean,
   priority: TaskPriority,
@@ -49,7 +59,7 @@ export function taskCardBaseClass(
   const base = [
     "rounded-xl border border-border bg-elevated transition-shadow",
     completed
-      ? "opacity-90"
+      ? "border-success-border/60 bg-success-toast-bg/50 opacity-95 ring-1 ring-inset ring-success-accent/15 dark:border-success-border/40 dark:bg-success-toast-bg/30 dark:ring-success-accent/25"
       : "shadow-sm",
   ];
   if (layout === "card") {

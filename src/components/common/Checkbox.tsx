@@ -42,17 +42,19 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           aria-hidden
         />
         <svg
-          className="pointer-events-none absolute left-1/2 top-1/2 z-[1] h-3 w-3 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity duration-150 peer-checked:opacity-100"
-          viewBox="0 0 16 16"
-          fill="currentColor"
+          className="pointer-events-none absolute left-1/2 top-1/2 z-[1] h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity duration-150 peer-checked:opacity-100"
+          viewBox="0 0 24 24"
+          fill="none"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden
         >
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M12.1 2.1a.9.9 0 0 0-1.3 0L5.4 6.1 2.1 2.1a.9.9 0 0 0-1.4 0 1.1 1.1 0 0 0 0 1.4L4.5 8.4a.9.9 0 0 0 1.3 0l5.1-4.1a.9.9 0 0 0 0-1.3.9.9 0 0 0-1-1z"
-            className="origin-center scale-90"
+            d="M20 6 9 17l-5-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </span>

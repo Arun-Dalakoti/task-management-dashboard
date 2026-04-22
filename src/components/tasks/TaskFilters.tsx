@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { ChevronDownIcon, FunnelIcon } from "../../icons";
 import { Input } from "../common/Input";
 import type { TaskPriority } from "../../types/task";
@@ -66,16 +66,14 @@ export function TaskFilters({
   );
   const dimensionCount = countDimensionFiltersActive(filterSnapshot);
 
-  const close = useCallback(() => setOpen(false), []);
-
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
+      if (e.key === "Escape") setOpen(false);
     };
     const onDown = (e: MouseEvent) => {
       const el = containerRef.current;
-      if (el && !el.contains(e.target as Node)) close();
+      if (el && !el.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener("keydown", onKey);
     document.addEventListener("mousedown", onDown);
@@ -83,7 +81,7 @@ export function TaskFilters({
       document.removeEventListener("keydown", onKey);
       document.removeEventListener("mousedown", onDown);
     };
-  }, [open, close]);
+  }, [open]);
 
   return (
     <div

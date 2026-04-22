@@ -7,3 +7,4 @@ export { Label } from "./Label";
 export { Modal, type ModalProps } from "./Modal";
 export { Select, type SelectProps } from "./Select";
 export { TextArea, type TextAreaProps } from "./TextArea";
+export { ToastProvider, useToast } from "./ToastProvider";

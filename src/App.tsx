@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "./components/common/Button";
+import { useToast } from "./components/common";
 import { ConfirmDialog } from "./components/common/ConfirmDialog";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { TaskCardView } from "./components/tasks/TaskCardView";
@@ -16,71 +17,59 @@ import { TaskViewToggle } from "./components/tasks/TaskViewToggle";
 import {
   filterTasks,
   hasActiveTaskFilters,
-  type TaskPriorityFilter,
-  type TaskStatusFilter,
+  type TaskFilterOptions,
 } from "./lib/filterTasks";
 import { useMinWidthSm } from "./hooks/useMinWidthSm";
 import { useTaskViewMode } from "./hooks/useTaskViewMode";
 import { useTasks } from "./hooks/useTasks";
-import type { Task } from "./types/task";
+import type { NewTaskFields, Task } from "./types/task";
 
 function App() {
+  const { showToast } = useToast();
   const { tasks, addTask, toggleTaskCompleted, updateTask, deleteTask } =
     useTasks();
   const { mode, setMode } = useTaskViewMode();
   const isWideLayout = useMinWidthSm();
-  const taskLayoutMode: "list" | "card" =
-    isWideLayout && mode === "card" ? "card" : "list";
+
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [taskPendingDelete, setTaskPendingDelete] = useState<Task | null>(null);
-  const [filterSearch, setFilterSearch] = useState("");
-  const [filterStatus, setFilterStatus] = useState<TaskStatusFilter>("all");
-  const [filterPriority, setFilterPriority] =
-    useState<TaskPriorityFilter>("all");
-  const [createTaskOpen, setCreateTaskOpen] = useState(false);
-  const [createFormKey, setCreateFormKey] = useState(0);
+  const [filters, setFilters] = useState<TaskFilterOptions>({
+    search: "",
+    status: "all",
+    priority: "all",
+  });
+  const createModalKeySeq = useRef(0);
+  const [createModalKey, setCreateModalKey] = useState<number | null>(null);
+
+  const taskLayoutMode: "list" | "card" =
+    isWideLayout && mode === "card" ? "card" : "list";
 
   const openCreateTaskModal = () => {
-    setCreateFormKey((k) => k + 1);
-    setCreateTaskOpen(true);
+    createModalKeySeq.current += 1;
+    setCreateModalKey(createModalKeySeq.current);
   };
 
-  const filterOptions = useMemo(
-    () => ({
-      search: filterSearch,
-      status: filterStatus,
-      priority: filterPriority,
-    }),
-    [filterSearch, filterStatus, filterPriority]
-  );
+  const filteredTasks = filterTasks(tasks, filters);
 
-  const filteredTasks = useMemo(
-    () => filterTasks(tasks, filterOptions),
-    [tasks, filterOptions]
-  );
-
-  const filtersActive = hasActiveTaskFilters(filterOptions);
+  const filtersActive = hasActiveTaskFilters(filters);
 
   const clearFilters = () => {
-    setFilterSearch("");
-    setFilterStatus("all");
-    setFilterPriority("all");
+    setFilters({ search: "", status: "all", priority: "all" });
   };
 
-  useEffect(() => {
-    if (editingTask && !tasks.some((t) => t.id === editingTask.id)) {
-      setEditingTask(null);
-    }
-  }, [editingTask, tasks]);
+  const handleAddTask = (fields: NewTaskFields) => {
+    addTask(fields);
+    showToast("Task created");
+  };
 
-  useEffect(() => {
-    if (
-      taskPendingDelete &&
-      !tasks.some((t) => t.id === taskPendingDelete.id)
-    ) {
-      setTaskPendingDelete(null);
-    }
-  }, [taskPendingDelete, tasks]);
+  const handleToggleCompleted = (id: string) => {
+    const current = tasks.find((t) => t.id === id);
+    const wasCompleted = current?.completed ?? false;
+    toggleTaskCompleted(id);
+    showToast(
+      wasCompleted ? "Task marked as pending" : "Task marked as complete"
+    );
+  };
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -132,12 +121,18 @@ function App() {
               <>
                 <div className="mb-4 sm:mb-5">
                   <TaskFilters
-                    search={filterSearch}
-                    onSearchChange={setFilterSearch}
-                    status={filterStatus}
-                    onStatusChange={setFilterStatus}
-                    priority={filterPriority}
-                    onPriorityChange={setFilterPriority}
+                    search={filters.search}
+                    onSearchChange={(value) =>
+                      setFilters((f) => ({ ...f, search: value }))
+                    }
+                    status={filters.status}
+                    onStatusChange={(value) =>
+                      setFilters((f) => ({ ...f, status: value }))
+                    }
+                    priority={filters.priority}
+                    onPriorityChange={(value) =>
+                      setFilters((f) => ({ ...f, priority: value }))
+                    }
                     onClearFilters={clearFilters}
                     hasActiveFilters={filtersActive}
                   />
@@ -147,14 +142,14 @@ function App() {
                 ) : taskLayoutMode === "list" ? (
                   <TaskListView
                     tasks={filteredTasks}
-                    onToggleCompleted={toggleTaskCompleted}
+                    onToggleCompleted={handleToggleCompleted}
                     onEditTask={setEditingTask}
                     onRequestDeleteTask={setTaskPendingDelete}
                   />
                 ) : (
                   <TaskCardView
                     tasks={filteredTasks}
-                    onToggleCompleted={toggleTaskCompleted}
+                    onToggleCompleted={handleToggleCompleted}
                     onEditTask={setEditingTask}
                     onRequestDeleteTask={setTaskPendingDelete}
                   />
@@ -166,10 +161,10 @@ function App() {
       </main>
 
       <TaskCreateModal
-        isOpen={createTaskOpen}
-        onClose={() => setCreateTaskOpen(false)}
-        formKey={createFormKey}
-        onCreateTask={addTask}
+        isOpen={createModalKey !== null}
+        onClose={() => setCreateModalKey(null)}
+        formKey={createModalKey ?? 0}
+        onCreateTask={handleAddTask}
       />
 
       <TaskEditModal
@@ -177,6 +172,7 @@ function App() {
         onClose={() => setEditingTask(null)}
         onSave={(id, patch) => {
           updateTask(id, patch);
+          showToast("Task updated");
         }}
       />
 
@@ -200,6 +196,7 @@ function App() {
         onConfirm={() => {
           if (!taskPendingDelete) return;
           deleteTask(taskPendingDelete.id);
+          showToast("Task deleted");
           if (editingTask?.id === taskPendingDelete.id) {
             setEditingTask(null);
           }

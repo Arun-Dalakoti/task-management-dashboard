@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const TASK_VIEW_STORAGE_KEY = "dashboard-task-view";
 
@@ -16,12 +16,12 @@ export function useTaskViewMode(): {
 } {
   const [mode, setModeState] = useState<TaskViewMode>(() => readMode());
 
-  const setMode = useCallback((next: TaskViewMode) => {
+  const setMode = (next: TaskViewMode) => {
     setModeState(next);
     if (typeof localStorage !== "undefined") {
       localStorage.setItem(TASK_VIEW_STORAGE_KEY, next);
     }
-  }, []);
+  };
 
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {

@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import type { Task } from "../../types/task";
 import { getTaskStatusCounts } from "../../lib/taskCounts";
 
@@ -8,10 +7,7 @@ type TaskStatusChipsProps = {
 
 /** Compact inline stats for the “All tasks” row (saves a separate stats bar). */
 export function TaskStatusChips({ tasks }: TaskStatusChipsProps) {
-  const { total, pending, completed } = useMemo(
-    () => getTaskStatusCounts(tasks),
-    [tasks],
-  );
+  const { total, pending, completed } = getTaskStatusCounts(tasks);
 
   return (
     <ul

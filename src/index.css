@@ -65,3 +65,101 @@
     cursor: pointer;
   }
 }
+
+/* Toasts: pure-CSS enter / exit (see ToastProvider) */
+@keyframes toast-in {
+  0% {
+    opacity: 0;
+    transform: translateX(1.1rem) translateY(-0.4rem) scale(0.94) rotate(1.5deg);
+    filter: blur(4px);
+  }
+  55% {
+    opacity: 1;
+    transform: translateX(-5px) translateY(0) scale(1.02) rotate(-0.5deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes toast-out {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(0.6rem) scale(0.95) translateY(-0.35rem);
+    filter: blur(3px);
+  }
+}
+
+@keyframes toast-sheen {
+  0% {
+    transform: translateX(-120%) skewX(-10deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-10deg);
+  }
+}
+
+.toast-anim-in {
+  animation: toast-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.toast-anim-out {
+  animation: toast-out 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.toast-sheen-wrap {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.toast-sheen-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgb(255 255 255 / 0.2),
+    transparent
+  );
+  animation: toast-sheen 0.78s cubic-bezier(0.25, 0.1, 0.25, 1) 0.1s 1;
+}
+
+.dark .toast-sheen-bar {
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgb(255 255 255 / 0.08),
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast-anim-in,
+  .toast-anim-out {
+    animation: none !important;
+    filter: none !important;
+  }
+
+  .toast-sheen-bar {
+    display: none;
+  }
+}
+
+.toast-surface {
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.1) inset,
+    0 10px 40px -10px rgb(0 0 0 / 0.2),
+    0 0 0 1px rgb(0 0 0 / 0.05);
+}

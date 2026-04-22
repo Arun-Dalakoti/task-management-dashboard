@@ -32,9 +32,7 @@ function App() {
   const taskLayoutMode: "list" | "card" =
     isWideLayout && mode === "card" ? "card" : "list";
   const [editingTask, setEditingTask] = useState<Task | null>(null);
-  const [taskPendingDelete, setTaskPendingDelete] = useState<Task | null>(
-    null,
-  );
+  const [taskPendingDelete, setTaskPendingDelete] = useState<Task | null>(null);
   const [filterSearch, setFilterSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState<TaskStatusFilter>("all");
   const [filterPriority, setFilterPriority] =
@@ -53,12 +51,12 @@ function App() {
       status: filterStatus,
       priority: filterPriority,
     }),
-    [filterSearch, filterStatus, filterPriority],
+    [filterSearch, filterStatus, filterPriority]
   );
 
   const filteredTasks = useMemo(
     () => filterTasks(tasks, filterOptions),
-    [tasks, filterOptions],
+    [tasks, filterOptions]
   );
 
   const filtersActive = hasActiveTaskFilters(filterOptions);
@@ -70,10 +68,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (
-      editingTask &&
-      !tasks.some((t) => t.id === editingTask.id)
-    ) {
+    if (editingTask && !tasks.some((t) => t.id === editingTask.id)) {
       setEditingTask(null);
     }
   }, [editingTask, tasks]);
@@ -121,33 +116,9 @@ function App() {
                       All tasks
                     </h2>
                     {tasks.length > 0 ? (
-                      <>
-                        <span
-                          className="select-none text-zinc-300 dark:text-zinc-600"
-                          aria-hidden
-                        >
-                          ·
-                        </span>
-                        <p className="m-0 text-sm text-zinc-500 dark:text-zinc-400">
-                          {filtersActive
-                            ? `${filteredTasks.length} of ${tasks.length} shown`
-                            : `${tasks.length} saved`}
-                        </p>
-                        <span
-                          className="select-none text-zinc-300 dark:text-zinc-600"
-                          aria-hidden
-                        >
-                          ·
-                        </span>
-                        <TaskStatusChips tasks={tasks} />
-                      </>
+                      <TaskStatusChips tasks={tasks} />
                     ) : null}
                   </div>
-                  {tasks.length === 0 ? (
-                    <p className="mt-1.5 text-sm text-zinc-500 dark:text-zinc-400">
-                      Nothing to show yet
-                    </p>
-                  ) : null}
                 </div>
                 {tasks.length > 0 && isWideLayout ? (
                   <TaskViewToggle value={mode} onChange={setMode} />

@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import type { InputHTMLAttributes } from "react";
+import { CheckIcon } from "../../icons";
 
 const boxClass = [
   "absolute inset-0 rounded border border-zinc-400 bg-white",
@@ -41,22 +42,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           className={boxClass}
           aria-hidden
         />
-        <svg
+        <CheckIcon
           className="pointer-events-none absolute left-1/2 top-1/2 z-[1] h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity duration-150 peer-checked:opacity-100"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
           aria-hidden
-        >
-          <path
-            d="M20 6 9 17l-5-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        />
       </span>
     );
   },

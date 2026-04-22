@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { ChevronDownIcon, FunnelIcon } from "../../icons";
 import { Input } from "../common/Input";
 import type { TaskPriority } from "../../types/task";
 import { TASK_PRIORITIES, TASK_PRIORITY_LABELS } from "../../types/task";
@@ -114,18 +115,22 @@ export function TaskFilters({
             aria-haspopup="true"
             id={`${panelId}-trigger`}
           >
-            <FunnelIcon className="h-4 w-4 shrink-0 text-zinc-500 dark:text-zinc-400" />
+            <FunnelIcon
+              className="h-4 w-4 shrink-0 text-zinc-500 dark:text-zinc-400"
+              aria-hidden
+            />
             <span>Filters</span>
             {dimensionCount > 0 ? (
               <span className="inline-flex min-w-[1.25rem] items-center justify-center rounded-full bg-violet-600 px-1.5 py-0.5 text-[0.7rem] font-semibold leading-none text-white tabular-nums dark:bg-violet-500">
                 {dimensionCount}
               </span>
             ) : null}
-            <ChevronIcon
+            <ChevronDownIcon
               className={[
                 "h-4 w-4 shrink-0 text-zinc-500 transition-transform dark:text-zinc-400",
                 open ? "rotate-180" : "",
               ].join(" ")}
+              aria-hidden
             />
           </button>
         </div>
@@ -215,43 +220,5 @@ export function TaskFilters({
         </div>
       ) : null}
     </div>
-  );
-}
-
-function FunnelIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      aria-hidden
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.658-1.591L3.66 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"
-      />
-    </svg>
-  );
-}
-
-function ChevronIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      aria-hidden
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="m19.5 8.25-7.5 7.5-7.5-7.5"
-      />
-    </svg>
   );
 }

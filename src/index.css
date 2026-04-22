@@ -56,4 +56,12 @@
   input[type="week"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
   }
+
+  /*
+   * Chromium / Safari: the clear (×) on search fields is a separate
+   * pseudo-element and does not use the same cursor as the input.
+   */
+  input[type="search"]::-webkit-search-cancel-button {
+    cursor: pointer;
+  }
 }

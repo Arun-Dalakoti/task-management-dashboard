@@ -5,6 +5,7 @@ import {
   type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
+import { CloseIcon } from "../../icons";
 
 export type ModalProps = {
   isOpen: boolean;
@@ -85,23 +86,5 @@ export function Modal({ isOpen, title, onClose, children }: ModalProps) {
       </div>
     </div>,
     document.body
-  );
-}
-
-function CloseIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M6 18 18 6M6 6l12 12"
-      />
-    </svg>
   );
 }

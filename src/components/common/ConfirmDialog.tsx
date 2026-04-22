@@ -24,7 +24,7 @@ export function ConfirmDialog({
 }: ConfirmDialogProps) {
   return (
     <Modal isOpen={isOpen} title={title} onClose={onCancel}>
-      <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+      <p className="text-sm leading-relaxed text-fg-muted">
         {description}
       </p>
       <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:flex-wrap sm:justify-end">

@@ -1,0 +1,170 @@
+/**
+ * Design tokens — edit :root / .dark only. Tailwind maps these in index.css @theme.
+ * Extra: --ds-brand-shadow (shadow-brand utility), var(--ds-brand) in EmptyListIllustration SVG.
+ */
+
+:root {
+  --ds-canvas: #fafafa;
+  --ds-elevated: #ffffff;
+  --ds-fg: #18181b;
+  --ds-fg-muted: #52525b;
+  --ds-fg-subtle: #71717a;
+  --ds-placeholder: #a1a1aa;
+  --ds-fg-label: #3f3f46;
+  --ds-border: #e4e4e7;
+  --ds-border-strong: #d4d4d8;
+  --ds-header-bg: rgb(255 255 255 / 0.8);
+  --ds-header-border: #e4e4e7;
+  --ds-overlay: rgb(9 9 11 / 0.55);
+  --ds-ring: rgb(0 0 0 / 0.05);
+
+  --ds-brand: #7c3aed;
+  --ds-brand-hover: #6d28d9;
+  --ds-brand-soft: #f5f3ff;
+  --ds-brand-fg-muted: #4c1d95;
+  --ds-brand-fg-soft: rgb(124 58 237 / 0.9);
+  --ds-brand-on: #ffffff;
+  --ds-brand-shadow: rgb(124 58 237 / 0.25);
+  --ds-focus: #8b5cf6;
+  --ds-brand-track: #f5f3ff;
+  --ds-brand-track-border: #ddd6fe;
+  --ds-segment-hover: rgb(237 233 254 / 0.9);
+
+  --ds-secondary-border: #d4d4d8;
+  --ds-secondary-bg: #ffffff;
+  --ds-secondary-fg: #27272a;
+  --ds-secondary-hover: #fafafa;
+
+  --ds-danger: #dc2626;
+  --ds-danger-hover: #b91c1c;
+  --ds-danger-on: #ffffff;
+  --ds-danger-focus: #ef4444;
+
+  --ds-info-border: #7dd3fc;
+  --ds-info-fg: #075985;
+  --ds-info-hover: #f0f9ff;
+
+  --ds-success-bg: #d1fae5;
+  --ds-success-fg: #065f46;
+  --ds-success-border: #a7f3d0;
+  --ds-success-accent: #10b981;
+  --ds-success-toast-bg: #ecfdf5;
+
+  --ds-warning-bg: #fef3c7;
+  --ds-warning-fg: #92400e;
+
+  --ds-error-bg: #fee2e2;
+  --ds-error-fg: #991b1b;
+  --ds-error-border: #fecaca;
+  --ds-error-accent: #ef4444;
+
+  --ds-high-bg: #fee2e2;
+  --ds-high-fg: #dc2626;
+  --ds-high-border: #f87171;
+
+  --ds-neutral-chip-bg: #f4f4f5;
+  --ds-neutral-chip-fg: #27272a;
+
+  --ds-low-bg: #e0f2fe;
+  --ds-low-fg: #0369a1;
+  --ds-low-border: #38bdf8;
+
+  --ds-medium-bg: #ffedd5;
+  --ds-medium-fg: #c2410c;
+  --ds-medium-border: #fb923c;
+
+  --ds-field-error: #dc2626;
+
+  --ds-control-border: #a1a1aa;
+  --ds-control-bg: #ffffff;
+
+  --ds-close-hover: #f4f4f5;
+
+  --ds-toast-neutral-bg: #18181b;
+  --ds-toast-neutral-fg: #fafafa;
+  --ds-toast-neutral-border: #27272a;
+  --ds-toast-neutral-accent: #71717a;
+}
+
+.dark {
+  --ds-canvas: #09090b;
+  --ds-elevated: #18181b;
+  --ds-fg: #fafafa;
+  --ds-fg-muted: #a1a1aa;
+  --ds-fg-subtle: #a1a1aa;
+  --ds-placeholder: #71717a;
+  --ds-fg-label: #d4d4d8;
+  --ds-border: #27272a;
+  --ds-border-strong: #3f3f46;
+  --ds-header-bg: rgb(9 9 11 / 0.8);
+  --ds-header-border: #27272a;
+  --ds-overlay: rgb(0 0 0 / 0.65);
+  --ds-ring: rgb(255 255 255 / 0.05);
+
+  --ds-brand: #8b5cf6;
+  --ds-brand-hover: #a78bfa;
+  --ds-brand-soft: #2e1064;
+  --ds-brand-fg-muted: #ddd6fe;
+  --ds-brand-fg-soft: rgb(167 139 250 / 0.9);
+  --ds-brand-on: #ffffff;
+  --ds-brand-shadow: rgb(139 92 246 / 0.2);
+  --ds-focus: #a78bfa;
+  --ds-brand-track: rgb(46 16 100 / 0.6);
+  --ds-brand-track-border: #5b21b6;
+  --ds-segment-hover: rgb(91 33 182 / 0.7);
+
+  --ds-secondary-border: #52525b;
+  --ds-secondary-bg: #18181b;
+  --ds-secondary-fg: #f4f4f5;
+  --ds-secondary-hover: #27272a;
+
+  --ds-danger: #dc2626;
+  --ds-danger-hover: #ef4444;
+  --ds-danger-on: #ffffff;
+  --ds-danger-focus: #f87171;
+
+  --ds-info-border: #0369a1;
+  --ds-info-fg: #7dd3fc;
+  --ds-info-hover: rgb(2 132 199 / 0.45);
+
+  --ds-success-bg: rgb(6 78 59 / 0.4);
+  --ds-success-fg: #6ee7b7;
+  --ds-success-border: #065f46;
+  --ds-success-accent: #10b981;
+  --ds-success-toast-bg: rgb(2 44 34 / 0.55);
+
+  --ds-warning-bg: rgb(120 53 15 / 0.5);
+  --ds-warning-fg: #fbbf24;
+
+  --ds-error-bg: rgb(69 10 10 / 0.55);
+  --ds-error-fg: #fca5a5;
+  --ds-error-border: #991b1b;
+  --ds-error-accent: #ef4444;
+
+  --ds-high-bg: rgb(127 29 29 / 0.4);
+  --ds-high-fg: #f87171;
+  --ds-high-border: #f87171;
+
+  --ds-neutral-chip-bg: #27272a;
+  --ds-neutral-chip-fg: #e4e4e7;
+
+  --ds-low-bg: rgb(12 74 110 / 0.4);
+  --ds-low-fg: #38bdf8;
+  --ds-low-border: #38bdf8;
+
+  --ds-medium-bg: rgb(124 45 18 / 0.45);
+  --ds-medium-fg: #fdba74;
+  --ds-medium-border: #fb923c;
+
+  --ds-field-error: #f87171;
+
+  --ds-control-border: #71717a;
+  --ds-control-bg: #18181b;
+
+  --ds-close-hover: #27272a;
+
+  --ds-toast-neutral-bg: #f4f4f5;
+  --ds-toast-neutral-fg: #18181b;
+  --ds-toast-neutral-border: #d4d4d8;
+  --ds-toast-neutral-accent: #a1a1aa;
+}

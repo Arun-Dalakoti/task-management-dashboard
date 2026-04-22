@@ -1,6 +1,81 @@
 @import "tailwindcss";
+@import "./theme/tokens.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --color-canvas: var(--ds-canvas);
+  --color-elevated: var(--ds-elevated);
+  --color-fg: var(--ds-fg);
+  --color-fg-muted: var(--ds-fg-muted);
+  --color-fg-subtle: var(--ds-fg-subtle);
+  --color-fg-label: var(--ds-fg-label);
+  --color-placeholder: var(--ds-placeholder);
+  --color-border: var(--ds-border);
+  --color-border-strong: var(--ds-border-strong);
+  --color-header-bg: var(--ds-header-bg);
+  --color-header-border: var(--ds-header-border);
+  --color-overlay: var(--ds-overlay);
+  --color-ring-subtle: var(--ds-ring);
+  --color-brand: var(--ds-brand);
+  --color-brand-hover: var(--ds-brand-hover);
+  --color-brand-soft: var(--ds-brand-soft);
+  --color-brand-fg-muted: var(--ds-brand-fg-muted);
+  --color-brand-fg-soft: var(--ds-brand-fg-soft);
+  --color-brand-on: var(--ds-brand-on);
+  --color-focus: var(--ds-focus);
+  --color-brand-track: var(--ds-brand-track);
+  --color-brand-track-border: var(--ds-brand-track-border);
+  --color-segment-hover: var(--ds-segment-hover);
+  --color-secondary-border: var(--ds-secondary-border);
+  --color-secondary-bg: var(--ds-secondary-bg);
+  --color-secondary-fg: var(--ds-secondary-fg);
+  --color-secondary-hover: var(--ds-secondary-hover);
+  --color-danger: var(--ds-danger);
+  --color-danger-hover: var(--ds-danger-hover);
+  --color-danger-on: var(--ds-danger-on);
+  --color-danger-focus: var(--ds-danger-focus);
+  --color-info-border: var(--ds-info-border);
+  --color-info-fg: var(--ds-info-fg);
+  --color-info-hover: var(--ds-info-hover);
+  --color-success-bg: var(--ds-success-bg);
+  --color-success-fg: var(--ds-success-fg);
+  --color-success-border: var(--ds-success-border);
+  --color-success-accent: var(--ds-success-accent);
+  --color-success-toast-bg: var(--ds-success-toast-bg);
+  --color-warning-bg: var(--ds-warning-bg);
+  --color-warning-fg: var(--ds-warning-fg);
+  --color-error-bg: var(--ds-error-bg);
+  --color-error-fg: var(--ds-error-fg);
+  --color-error-border: var(--ds-error-border);
+  --color-error-accent: var(--ds-error-accent);
+  --color-high-bg: var(--ds-high-bg);
+  --color-high-fg: var(--ds-high-fg);
+  --color-high-border: var(--ds-high-border);
+  --color-neutral-chip-bg: var(--ds-neutral-chip-bg);
+  --color-neutral-chip-fg: var(--ds-neutral-chip-fg);
+  --color-low-bg: var(--ds-low-bg);
+  --color-low-fg: var(--ds-low-fg);
+  --color-low-border: var(--ds-low-border);
+  --color-medium-bg: var(--ds-medium-bg);
+  --color-medium-fg: var(--ds-medium-fg);
+  --color-medium-border: var(--ds-medium-border);
+  --color-field-error: var(--ds-field-error);
+  --color-control-border: var(--ds-control-border);
+  --color-control-bg: var(--ds-control-bg);
+  --color-close-hover: var(--ds-close-hover);
+  --color-toast-neutral-bg: var(--ds-toast-neutral-bg);
+  --color-toast-neutral-fg: var(--ds-toast-neutral-fg);
+  --color-toast-neutral-border: var(--ds-toast-neutral-border);
+  --color-toast-neutral-accent: var(--ds-toast-neutral-accent);
+}
+
+@utility shadow-brand {
+  box-shadow: 0 1px 2px 0 var(--ds-brand-shadow);
+}
 
 @layer base {
   html {
@@ -8,7 +83,7 @@
   }
 
   body {
-    @apply min-h-dvh bg-zinc-50 text-zinc-900 transition-colors duration-200 dark:bg-zinc-950 dark:text-zinc-50;
+    @apply min-h-dvh bg-canvas font-sans text-fg transition-colors duration-200;
   }
 
   #root {
@@ -158,8 +233,6 @@
 }
 
 .toast-surface {
-  box-shadow:
-    0 0 0 1px rgb(255 255 255 / 0.1) inset,
-    0 10px 40px -10px rgb(0 0 0 / 0.2),
-    0 0 0 1px rgb(0 0 0 / 0.05);
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.1) inset,
+    0 10px 40px -10px rgb(0 0 0 / 0.2), 0 0 0 1px rgb(0 0 0 / 0.05);
 }

@@ -4,11 +4,11 @@ type ButtonVariant = "primary" | "secondary" | "danger";
 
 const variantClass: Record<ButtonVariant, string> = {
   primary:
-    "border-transparent bg-violet-600 text-white hover:bg-violet-700 focus-visible:outline-violet-500 dark:bg-violet-500 dark:hover:bg-violet-400",
+    "border-transparent bg-brand text-brand-on hover:bg-brand-hover focus-visible:outline-focus",
   secondary:
-    "border-zinc-300 bg-white text-zinc-800 hover:bg-zinc-50 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800",
+    "border-secondary-border bg-secondary-bg text-secondary-fg hover:bg-secondary-hover focus-visible:outline-focus",
   danger:
-    "border-transparent bg-red-600 text-white hover:bg-red-700 focus-visible:outline-red-500 dark:bg-red-600 dark:hover:bg-red-500",
+    "border-transparent bg-danger text-danger-on hover:bg-danger-hover focus-visible:outline-danger-focus",
 };
 
 export type ButtonProps = {

@@ -75,9 +75,9 @@ function App() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="border-b border-zinc-200 bg-white/80 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/80">
+      <header className="border-b border-header-border bg-header-bg backdrop-blur-sm">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-2 px-4 sm:h-16 sm:gap-3 sm:px-6">
-          <h1 className="min-w-0 truncate text-base font-semibold tracking-tight text-zinc-900 sm:text-lg dark:text-zinc-50">
+          <h1 className="min-w-0 truncate text-base font-semibold tracking-tight text-fg sm:text-lg">
             Dashboard
           </h1>
           <div className="flex shrink-0 items-center gap-2">
@@ -102,7 +102,7 @@ function App() {
                   <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1.5 [line-height:1.35]">
                     <h2
                       id="tasks-heading"
-                      className="text-base font-semibold text-zinc-900 dark:text-zinc-50"
+                      className="text-base font-semibold text-fg"
                     >
                       All tasks
                     </h2>
@@ -184,7 +184,7 @@ function App() {
         description={
           taskPendingDelete ? (
             <>
-              <span className="font-medium text-zinc-800 dark:text-zinc-200">
+              <span className="font-medium text-secondary-fg">
                 {taskPendingDelete.title}
               </span>{" "}
               will be removed permanently from this browser. This cannot be

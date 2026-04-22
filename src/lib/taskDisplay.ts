@@ -17,24 +17,24 @@ export function formatDueDate(isoDate: string): string {
 export function priorityBadgeClass(priority: TaskPriority): string {
   switch (priority) {
     case "low":
-      return "bg-sky-100 text-sky-600 dark:bg-sky-900/40 dark:text-sky-400";
+      return "bg-low-bg text-low-fg";
     case "medium":
-      return "bg-orange-100 text-orange-600 dark:bg-orange-900/40 dark:text-orange-400";
+      return "bg-medium-bg text-medium-fg";
     case "high":
-      return "bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-400";
+      return "bg-high-bg text-high-fg";
     default:
-      return "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200";
+      return "bg-neutral-chip-bg text-neutral-chip-fg";
   }
 }
 
 function taskCardPriorityBorder(priority: TaskPriority): string {
   switch (priority) {
     case "high":
-      return "border-l-4 border-l-red-400";
+      return "border-l-4 border-l-high-border";
     case "medium":
-      return "border-l-4 border-l-orange-400";
+      return "border-l-4 border-l-medium-border";
     case "low":
-      return "border-l-4 border-l-sky-400";
+      return "border-l-4 border-l-low-border";
     default:
       return "";
   }
@@ -47,7 +47,7 @@ export function taskCardBaseClass(
   layout: "list" | "card",
 ): string {
   const base = [
-    "rounded-xl border border-zinc-200 bg-white transition-shadow dark:border-zinc-800 dark:bg-zinc-900",
+    "rounded-xl border border-border bg-elevated transition-shadow",
     completed
       ? "opacity-90"
       : "shadow-sm",

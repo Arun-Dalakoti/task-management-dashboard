@@ -15,23 +15,23 @@ export function TaskStatusChips({ tasks }: TaskStatusChipsProps) {
       aria-label={`Total ${total}, ${pending} pending, ${completed} completed`}
     >
       <li>
-        <span className="inline-flex items-baseline gap-1 rounded-full bg-zinc-100 px-2 py-0.5 text-xs tabular-nums dark:bg-zinc-800">
-          <span className="font-medium text-zinc-600 dark:text-zinc-300">
+        <span className="inline-flex items-baseline gap-1 rounded-full bg-neutral-chip-bg px-2 py-0.5 text-xs tabular-nums">
+          <span className="font-medium text-neutral-chip-fg">
             Total
           </span>
-          <span className="font-semibold text-zinc-600 dark:text-zinc-300">
+          <span className="font-semibold text-neutral-chip-fg">
             {total}
           </span>
         </span>
       </li>
       <li>
-        <span className="inline-flex items-baseline gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-xs tabular-nums text-amber-700 dark:bg-amber-900/50 dark:text-amber-400">
+        <span className="inline-flex items-baseline gap-1 rounded-full bg-warning-bg px-2 py-0.5 text-xs tabular-nums text-warning-fg">
           <span className="font-medium">Pending</span>
           <span className="font-semibold tabular-nums">{pending}</span>
         </span>
       </li>
       <li>
-        <span className="inline-flex items-baseline gap-1 rounded-full bg-violet-100 px-2 py-0.5 text-xs tabular-nums text-violet-700 dark:bg-violet-900/50 dark:text-violet-400">
+        <span className="inline-flex items-baseline gap-1 rounded-full bg-brand-soft px-2 py-0.5 text-xs tabular-nums text-brand-fg-muted">
           <span className="font-medium">Completed</span>
           <span className="font-semibold tabular-nums">{completed}</span>
         </span>

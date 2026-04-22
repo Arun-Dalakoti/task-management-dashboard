@@ -15,14 +15,14 @@ export function Field({ label, htmlFor, hint, error, children }: FieldProps) {
       <Label htmlFor={htmlFor}>{label}</Label>
       {children}
       {hint && !error ? (
-        <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">
+        <p className="mt-1.5 text-xs text-fg-subtle">
           {hint}
         </p>
       ) : null}
       {error ? (
         <p
           id={`${htmlFor}-error`}
-          className="mt-1.5 text-xs font-medium text-red-600 dark:text-red-400"
+          className="mt-1.5 text-xs font-medium text-field-error"
           role="alert"
         >
           {error}

@@ -160,7 +160,7 @@ export function TaskEditModal({ task, onClose, onSave }: TaskEditModalProps) {
         </div>
 
         <Field label="Status" htmlFor="edit-task-completed">
-          <div className="flex min-h-9 items-center gap-2.5 rounded-lg border border-zinc-300 bg-white px-2.5 py-1.5 dark:border-zinc-600 dark:bg-zinc-900">
+          <div className="flex min-h-9 items-center gap-2.5 rounded-lg border border-border-strong bg-elevated px-2.5 py-1.5">
             <Checkbox
               id="edit-task-completed"
               name="completed"
@@ -169,7 +169,7 @@ export function TaskEditModal({ task, onClose, onSave }: TaskEditModalProps) {
             />
             <label
               htmlFor="edit-task-completed"
-              className="text-sm text-zinc-700 dark:text-zinc-300"
+              className="text-sm text-fg-label"
             >
               Mark as completed
             </label>

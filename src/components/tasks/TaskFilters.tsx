@@ -22,18 +22,18 @@ export type TaskFiltersProps = {
 };
 
 const segmentWrap =
-  "inline-flex w-full flex-wrap gap-1.5 rounded-lg border border-violet-200 bg-violet-50 p-0.5 dark:border-violet-800 dark:bg-violet-950/60";
+  "inline-flex w-full flex-wrap gap-1.5 rounded-lg border border-brand-track-border bg-brand-track p-0.5";
 
 const segmentBtn = (active: boolean) =>
   [
-    "rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-violet-500 sm:px-3 sm:py-2 sm:text-sm",
+    "rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-focus sm:px-3 sm:py-2 sm:text-sm",
     active
-      ? "bg-violet-600 text-white shadow-sm shadow-violet-600/25 dark:bg-violet-500 dark:shadow-violet-500/20"
-      : "text-violet-900 hover:bg-violet-100/90 dark:text-violet-200 dark:hover:bg-violet-900/70",
+      ? "bg-brand text-brand-on shadow-sm shadow-brand"
+      : "text-brand-fg-muted hover:bg-segment-hover",
   ].join(" ");
 
 const filterGroupTitle =
-  "mb-1.5 block text-xs font-medium text-zinc-600 dark:text-zinc-300 sm:text-sm";
+  "mb-1.5 block text-xs font-medium text-fg-muted sm:text-sm";
 
 function filterOptionsToSnapshot(
   search: string,
@@ -86,7 +86,7 @@ export function TaskFilters({
   return (
     <div
       ref={containerRef}
-      className="relative rounded-xl border border-zinc-200 bg-white p-2 dark:border-zinc-800 dark:bg-zinc-900/40 sm:p-3"
+      className="relative rounded-xl border border-border bg-elevated p-2 sm:p-3"
     >
       <div className="flex flex-col gap-2 sm:flex-row sm:items-stretch sm:gap-2">
         <div className="min-w-0 flex-1">
@@ -107,25 +107,25 @@ export function TaskFilters({
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border border-zinc-300 bg-white px-3 text-sm font-medium text-zinc-800 shadow-sm transition-colors hover:bg-zinc-50 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800 sm:w-auto"
+            className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border border-border-strong bg-elevated px-3 text-sm font-medium text-secondary-fg shadow-sm transition-colors hover:bg-secondary-hover sm:w-auto"
             aria-expanded={open}
             aria-controls={panelId}
             aria-haspopup="true"
             id={`${panelId}-trigger`}
           >
             <FunnelIcon
-              className="h-4 w-4 shrink-0 text-zinc-500 dark:text-zinc-400"
+              className="h-4 w-4 shrink-0 text-fg-subtle"
               aria-hidden
             />
             <span>Filters</span>
             {dimensionCount > 0 ? (
-              <span className="inline-flex min-w-[1.25rem] items-center justify-center rounded-full bg-violet-600 px-1.5 py-0.5 text-[0.7rem] font-semibold leading-none text-white tabular-nums dark:bg-violet-500">
+              <span className="inline-flex min-w-[1.25rem] items-center justify-center rounded-full bg-brand px-1.5 py-0.5 text-[0.7rem] font-semibold leading-none text-brand-on tabular-nums">
                 {dimensionCount}
               </span>
             ) : null}
             <ChevronDownIcon
               className={[
-                "h-4 w-4 shrink-0 text-zinc-500 transition-transform dark:text-zinc-400",
+                "h-4 w-4 shrink-0 text-fg-subtle transition-transform",
                 open ? "rotate-180" : "",
               ].join(" ")}
               aria-hidden
@@ -139,7 +139,7 @@ export function TaskFilters({
           id={panelId}
           role="region"
           aria-label="Filter options"
-          className="absolute left-0 right-0 top-full z-30 mt-2 max-h-[min(70vh,28rem)] overflow-y-auto rounded-xl border border-zinc-200 bg-white p-3 shadow-lg ring-1 ring-black/5 dark:border-zinc-700 dark:bg-zinc-900 dark:ring-white/5 sm:left-auto sm:right-0 sm:w-96"
+          className="absolute left-0 right-0 top-full z-30 mt-2 max-h-[min(70vh,28rem)] overflow-y-auto rounded-xl border border-border bg-elevated p-3 shadow-lg ring-1 ring-subtle sm:left-auto sm:right-0 sm:w-96"
         >
           <div className="grid gap-4">
             <div>
@@ -209,7 +209,7 @@ export function TaskFilters({
                   onClearFilters();
                   setOpen(false);
                 }}
-                className="w-full rounded-lg border border-zinc-200 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                className="w-full rounded-lg border border-border py-2 text-sm font-medium text-fg-label hover:bg-secondary-hover"
               >
                 Clear all filters
               </button>

@@ -47,22 +47,20 @@ function toastKindClasses(kind: ToastKind, exiting: boolean): string {
     case "success":
       return [
         base,
-        "border border-emerald-200 border-l-4 border-l-emerald-500",
-        "bg-emerald-50 text-emerald-800 dark:border-emerald-800 dark:border-l-emerald-500",
-        "dark:bg-emerald-950 dark:text-emerald-300",
+        "border border-success-border border-l-4 border-l-success-accent",
+        "bg-success-toast-bg text-success-fg",
       ].join(" ");
     case "destructive":
       return [
         base,
-        "border border-red-200 border-l-4 border-l-red-500",
-        "bg-red-50 text-red-800 dark:border-red-800 dark:border-l-red-500",
-        "dark:bg-red-950 dark:text-red-300",
+        "border border-error-border border-l-4 border-l-error-accent",
+        "bg-error-bg text-error-fg",
       ].join(" ");
     default:
       return [
         base,
-        "border border-l-4 border-l-zinc-500 border-zinc-800 bg-zinc-900 text-zinc-50",
-        "dark:border-zinc-300 dark:border-l-zinc-400 dark:bg-zinc-100 dark:text-zinc-900",
+        "border border-toast-neutral-border border-l-4 border-l-toast-neutral-accent",
+        "bg-toast-neutral-bg text-toast-neutral-fg",
       ].join(" ");
   }
 }

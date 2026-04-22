@@ -37,17 +37,17 @@ export function TaskItem({
       <div className="min-w-0 flex-1">
         <h3
           className={[
-            "text-base font-semibold text-zinc-900 dark:text-zinc-50",
+            "text-base font-semibold text-fg",
             task.completed ? "line-through opacity-70" : "",
           ].join(" ")}
         >
           {task.title}
         </h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+        <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">
           {task.description ? (
             task.description
           ) : (
-            <span className="italic text-zinc-400 dark:text-zinc-500">
+            <span className="italic text-fg-subtle">
               No description
             </span>
           )}
@@ -71,16 +71,16 @@ export function TaskItem({
                 className={[
                   "inline-flex items-center rounded-full px-2.5 py-0.5 font-medium",
                   task.completed
-                    ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400"
-                    : "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400",
+                    ? "bg-success-bg text-success-fg"
+                    : "bg-warning-bg text-warning-fg",
                 ].join(" ")}
               >
                 {statusLabel}
               </span>
             </dd>
           </div>
-          <div className="flex items-center gap-1.5 text-zinc-600 dark:text-zinc-400">
-            <dt className="font-medium text-zinc-500 dark:text-zinc-500">
+          <div className="flex items-center gap-1.5 text-fg-muted">
+            <dt className="font-medium text-fg-subtle">
               Due
             </dt>
             <dd className="font-normal tabular-nums">
@@ -110,7 +110,7 @@ export function TaskItem({
         type="button"
         variant="secondary"
         aria-label="Edit task"
-        className="size-9 shrink-0 !border-sky-300 !bg-white p-0 text-base leading-none !text-sky-800 shadow-sm hover:!bg-sky-50 focus-visible:outline-sky-500 dark:!border-sky-700 dark:!bg-zinc-900 dark:!text-sky-300 dark:hover:!bg-sky-950/45 sm:size-auto sm:px-3 sm:py-2 sm:text-xs sm:font-medium sm:leading-normal"
+        className="size-9 shrink-0 !border-info-border !bg-secondary-bg p-0 text-base leading-none !text-info-fg shadow-sm hover:!bg-info-hover focus-visible:outline-focus sm:size-auto sm:px-3 sm:py-2 sm:text-xs sm:font-medium sm:leading-normal"
         onClick={() => onEditTask(task)}
       >
         <span className="sm:hidden" aria-hidden>
@@ -124,7 +124,7 @@ export function TaskItem({
   const editBar =
     variant === "card" ? (
       <div className="mt-auto w-full">
-        <div className="mt-3 flex flex-nowrap items-center justify-end gap-1.5 border-t border-zinc-200 pt-3 dark:border-zinc-800 sm:gap-2">
+        <div className="mt-3 flex flex-nowrap items-center justify-end gap-1.5 border-t border-border pt-3 sm:gap-2">
           {editActions}
         </div>
       </div>

@@ -76,12 +76,12 @@ export function TaskCreateForm({
       className={
         embedded
           ? "space-y-0"
-          : "rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/60"
+          : "rounded-xl border border-border bg-elevated p-6 shadow-sm"
       }
       noValidate
     >
       {embedded ? null : (
-        <h2 className="mb-6 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+        <h2 className="mb-6 text-lg font-semibold text-fg">
           New task
         </h2>
       )}

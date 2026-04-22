@@ -16,7 +16,7 @@ export function TaskListView({
 }: TaskListViewProps) {
   return (
     <ul
-      className="divide-y divide-zinc-200 overflow-hidden rounded-xl border border-zinc-200 bg-white dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-900"
+      className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-elevated"
       aria-label="Tasks in list layout"
     >
       {tasks.map((task) => (

@@ -8,7 +8,7 @@ type TaskViewToggleProps = {
 };
 
 const baseBtn =
-  "inline-flex items-center justify-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-violet-500 sm:gap-2 sm:px-4 sm:py-2 sm:text-sm";
+  "inline-flex items-center justify-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-focus sm:gap-2 sm:px-4 sm:py-2 sm:text-sm";
 
 export function TaskViewToggle({
   value,
@@ -18,7 +18,7 @@ export function TaskViewToggle({
   return (
     <div
       className={[
-        "inline-flex w-auto shrink-0 rounded-lg border border-violet-200 bg-violet-50 p-0.5 dark:border-violet-800 dark:bg-violet-950/60",
+        "inline-flex w-auto shrink-0 rounded-lg border border-brand-track-border bg-brand-track p-0.5",
         className,
       ]
         .filter(Boolean)
@@ -32,8 +32,8 @@ export function TaskViewToggle({
         className={[
           baseBtn,
           value === "list"
-            ? "bg-violet-600 text-white shadow-sm shadow-violet-600/25 dark:bg-violet-500 dark:shadow-violet-500/20"
-            : "text-violet-900 hover:bg-violet-100/90 dark:text-violet-200 dark:hover:bg-violet-900/70",
+            ? "bg-brand text-brand-on shadow-sm shadow-brand"
+            : "text-brand-fg-muted hover:bg-segment-hover",
         ].join(" ")}
         aria-pressed={value === "list"}
       >
@@ -49,8 +49,8 @@ export function TaskViewToggle({
         className={[
           baseBtn,
           value === "card"
-            ? "bg-violet-600 text-white shadow-sm shadow-violet-600/25 dark:bg-violet-500 dark:shadow-violet-500/20"
-            : "text-violet-900 hover:bg-violet-100/90 dark:text-violet-200 dark:hover:bg-violet-900/70",
+            ? "bg-brand text-brand-on shadow-sm shadow-brand"
+            : "text-brand-fg-muted hover:bg-segment-hover",
         ].join(" ")}
         aria-pressed={value === "card"}
       >

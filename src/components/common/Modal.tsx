@@ -53,7 +53,7 @@ export function Modal({ isOpen, title, onClose, children }: ModalProps) {
     >
       <button
         type="button"
-        className="absolute inset-0 bg-zinc-950/55 backdrop-blur-[1px] transition-opacity dark:bg-black/65"
+        className="absolute inset-0 bg-overlay backdrop-blur-[1px] transition-opacity"
         aria-label="Close dialog"
         onClick={onClose}
       />
@@ -62,19 +62,19 @@ export function Modal({ isOpen, title, onClose, children }: ModalProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="relative z-10 flex max-h-[92dvh] w-full max-w-lg flex-col rounded-t-2xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-700 dark:bg-zinc-900 sm:max-h-[85dvh] sm:rounded-2xl"
+        className="relative z-10 flex max-h-[92dvh] w-full max-w-lg flex-col rounded-t-2xl border border-border bg-elevated shadow-2xl sm:max-h-[85dvh] sm:rounded-2xl"
       >
-        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-zinc-200 px-4 py-4 dark:border-zinc-800 sm:px-6">
+        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-border px-4 py-4 sm:px-6">
           <h2
             id={titleId}
-            className="text-lg font-semibold text-zinc-900 dark:text-zinc-50"
+            className="text-lg font-semibold text-fg"
           >
             {title}
           </h2>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+            className="rounded-lg p-2 text-fg-subtle transition-colors hover:bg-close-hover hover:text-fg"
             aria-label="Close"
           >
             <CloseIcon className="h-5 w-5" aria-hidden />

@@ -71,8 +71,8 @@ export function TaskItem({
                 className={[
                   "inline-flex items-center rounded-full px-2.5 py-0.5 font-medium",
                   task.completed
-                    ? "bg-violet-100 text-violet-900 dark:bg-violet-950/60 dark:text-violet-200"
-                    : "bg-zinc-200 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200",
+                    ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400"
+                    : "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400",
                 ].join(" ")}
               >
                 {statusLabel}
@@ -92,20 +92,13 @@ export function TaskItem({
     </div>
   );
 
-  const editBar = (
-    <div
-      className={[
-        "flex flex-nowrap items-center justify-end gap-1.5 sm:gap-2",
-        variant === "card"
-          ? "mt-auto border-t border-zinc-200 pt-3 dark:border-zinc-800"
-          : "mt-3",
-      ].join(" ")}
-    >
+  const editActions = (
+    <>
       <Button
         type="button"
-        variant="secondary"
+        variant="danger"
         aria-label="Delete task"
-        className="size-9 shrink-0 border-red-200 p-0 text-base leading-none text-red-700 hover:bg-red-50 dark:border-red-900/60 dark:text-red-400 dark:hover:bg-red-950/40 sm:size-auto sm:px-3 sm:py-2 sm:text-xs sm:font-medium sm:leading-normal"
+        className="size-9 shrink-0 p-0 text-base leading-none sm:size-auto sm:px-3 sm:py-2 sm:text-xs sm:font-medium sm:leading-normal"
         onClick={() => onRequestDeleteTask(task)}
       >
         <span className="sm:hidden" aria-hidden>
@@ -117,7 +110,7 @@ export function TaskItem({
         type="button"
         variant="secondary"
         aria-label="Edit task"
-        className="size-9 shrink-0 p-0 text-base leading-none sm:size-auto sm:px-3 sm:py-2 sm:text-xs sm:font-medium sm:leading-normal"
+        className="size-9 shrink-0 !border-sky-300 !bg-white p-0 text-base leading-none !text-sky-800 shadow-sm hover:!bg-sky-50 focus-visible:outline-sky-500 dark:!border-sky-700 dark:!bg-zinc-900 dark:!text-sky-300 dark:hover:!bg-sky-950/45 sm:size-auto sm:px-3 sm:py-2 sm:text-xs sm:font-medium sm:leading-normal"
         onClick={() => onEditTask(task)}
       >
         <span className="sm:hidden" aria-hidden>
@@ -125,14 +118,27 @@ export function TaskItem({
         </span>
         <span className="hidden sm:inline">Edit</span>
       </Button>
-    </div>
+    </>
   );
+
+  const editBar =
+    variant === "card" ? (
+      <div className="mt-auto w-full">
+        <div className="mt-3 flex flex-nowrap items-center justify-end gap-1.5 border-t border-zinc-200 pt-3 dark:border-zinc-800 sm:gap-2">
+          {editActions}
+        </div>
+      </div>
+    ) : (
+      <div className="mt-3 flex flex-nowrap items-center justify-end gap-1.5 sm:gap-2">
+        {editActions}
+      </div>
+    );
 
   if (variant === "card") {
     return (
       <article
         className={[
-          taskCardBaseClass(task.completed),
+          taskCardBaseClass(task.completed, task.priority, "card"),
           "flex h-full flex-col p-4 sm:p-5",
         ].join(" ")}
       >

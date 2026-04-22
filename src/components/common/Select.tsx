@@ -9,7 +9,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <select
         ref={ref}
-        className={[controlClassName, className].filter(Boolean).join(' ')}
+        className={[
+          controlClassName,
+          "!pr-10",
+          className,
+        ]
+          .filter(Boolean)
+          .join(' ')}
         {...props}
       >
         {children}

@@ -22,14 +22,14 @@ export type TaskFiltersProps = {
 };
 
 const segmentWrap =
-  "inline-flex w-full flex-wrap gap-1.5 rounded-lg border border-zinc-200 bg-zinc-100/80 p-1 dark:border-zinc-700 dark:bg-zinc-900/80";
+  "inline-flex w-full flex-wrap gap-1.5 rounded-lg border border-violet-200 bg-violet-50 p-0.5 dark:border-violet-800 dark:bg-violet-950/60";
 
 const segmentBtn = (active: boolean) =>
   [
-    "rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors sm:px-3 sm:py-2 sm:text-sm",
+    "rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-violet-500 sm:px-3 sm:py-2 sm:text-sm",
     active
-      ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-50"
-      : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100",
+      ? "bg-violet-600 text-white shadow-sm shadow-violet-600/25 dark:bg-violet-500 dark:shadow-violet-500/20"
+      : "text-violet-900 hover:bg-violet-100/90 dark:text-violet-200 dark:hover:bg-violet-900/70",
   ].join(" ");
 
 const filterGroupTitle =

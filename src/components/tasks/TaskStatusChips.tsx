@@ -15,33 +15,25 @@ export function TaskStatusChips({ tasks }: TaskStatusChipsProps) {
       aria-label={`Total ${total}, ${pending} pending, ${completed} completed`}
     >
       <li>
-        <span className="inline-flex items-baseline gap-1 rounded-full border border-zinc-200 bg-zinc-50/90 px-2 py-0.5 text-xs tabular-nums dark:border-zinc-600 dark:bg-zinc-800/80">
-          <span className="font-medium text-zinc-500 dark:text-zinc-400">
+        <span className="inline-flex items-baseline gap-1 rounded-full bg-zinc-100 px-2 py-0.5 text-xs tabular-nums dark:bg-zinc-800">
+          <span className="font-medium text-zinc-600 dark:text-zinc-300">
             Total
           </span>
-          <span className="font-semibold text-zinc-900 dark:text-zinc-100">
+          <span className="font-semibold text-zinc-600 dark:text-zinc-300">
             {total}
           </span>
         </span>
       </li>
       <li>
-        <span className="inline-flex items-baseline gap-1 rounded-full border border-amber-200/80 bg-amber-50/80 px-2 py-0.5 text-xs tabular-nums dark:border-amber-900/50 dark:bg-amber-950/30">
-          <span className="font-medium text-amber-800/80 dark:text-amber-300/90">
-            Pending
-          </span>
-          <span className="font-semibold text-amber-800 dark:text-amber-300">
-            {pending}
-          </span>
+        <span className="inline-flex items-baseline gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-xs tabular-nums text-amber-700 dark:bg-amber-900/50 dark:text-amber-400">
+          <span className="font-medium">Pending</span>
+          <span className="font-semibold tabular-nums">{pending}</span>
         </span>
       </li>
       <li>
-        <span className="inline-flex items-baseline gap-1 rounded-full border border-violet-200/80 bg-violet-50/80 px-2 py-0.5 text-xs tabular-nums dark:border-violet-900/50 dark:bg-violet-950/35">
-          <span className="font-medium text-violet-800/80 dark:text-violet-300/90">
-            Completed
-          </span>
-          <span className="font-semibold text-violet-800 dark:text-violet-300">
-            {completed}
-          </span>
+        <span className="inline-flex items-baseline gap-1 rounded-full bg-violet-100 px-2 py-0.5 text-xs tabular-nums text-violet-700 dark:bg-violet-900/50 dark:text-violet-400">
+          <span className="font-medium">Completed</span>
+          <span className="font-semibold tabular-nums">{completed}</span>
         </span>
       </li>
     </ul>

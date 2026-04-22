@@ -59,16 +59,18 @@ function App() {
 
   const handleAddTask = (fields: NewTaskFields) => {
     addTask(fields);
-    showToast("Task created");
+    showToast("Task created", "success");
   };
 
   const handleToggleCompleted = (id: string) => {
     const current = tasks.find((t) => t.id === id);
     const wasCompleted = current?.completed ?? false;
     toggleTaskCompleted(id);
-    showToast(
-      wasCompleted ? "Task marked as pending" : "Task marked as complete"
-    );
+    if (wasCompleted) {
+      showToast("Task marked as pending", "default");
+    } else {
+      showToast("Task marked as complete", "success");
+    }
   };
 
   return (
@@ -76,7 +78,7 @@ function App() {
       <header className="border-b border-zinc-200 bg-white/80 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/80">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-2 px-4 sm:h-16 sm:gap-3 sm:px-6">
           <h1 className="min-w-0 truncate text-base font-semibold tracking-tight text-zinc-900 sm:text-lg dark:text-zinc-50">
-            Task Dashboard
+            Dashboard
           </h1>
           <div className="flex shrink-0 items-center gap-2">
             <Button
@@ -172,7 +174,7 @@ function App() {
         onClose={() => setEditingTask(null)}
         onSave={(id, patch) => {
           updateTask(id, patch);
-          showToast("Task updated");
+          showToast("Task updated", "success");
         }}
       />
 
@@ -196,7 +198,7 @@ function App() {
         onConfirm={() => {
           if (!taskPendingDelete) return;
           deleteTask(taskPendingDelete.id);
-          showToast("Task deleted");
+          showToast("Task deleted", "destructive");
           if (editingTask?.id === taskPendingDelete.id) {
             setEditingTask(null);
           }

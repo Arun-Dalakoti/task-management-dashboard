@@ -10,14 +10,17 @@ import {
 
 const VISIBLE_MS = 4200;
 
+export type ToastKind = "success" | "destructive" | "default";
+
 type Toast = {
   id: string;
   message: string;
   exiting: boolean;
+  kind: ToastKind;
 };
 
 type ToastContextValue = {
-  showToast: (message: string) => void;
+  showToast: (message: string, kind?: ToastKind) => void;
 };
 
 const ToastContext = createContext<ToastContextValue | null>(null);
@@ -34,21 +37,54 @@ function exitAnimationNameOk(name: string): boolean {
   return name.toLowerCase().includes("toast-out");
 }
 
+function toastKindClasses(kind: ToastKind, exiting: boolean): string {
+  const anim = exiting ? "toast-anim-out" : "toast-anim-in";
+  const base =
+    "pointer-events-auto relative w-full overflow-hidden rounded-xl p-2.5 pl-2.5 text-sm toast-surface " +
+    anim;
+
+  switch (kind) {
+    case "success":
+      return [
+        base,
+        "border border-emerald-200 border-l-4 border-l-emerald-500",
+        "bg-emerald-50 text-emerald-800 dark:border-emerald-800 dark:border-l-emerald-500",
+        "dark:bg-emerald-950 dark:text-emerald-300",
+      ].join(" ");
+    case "destructive":
+      return [
+        base,
+        "border border-red-200 border-l-4 border-l-red-500",
+        "bg-red-50 text-red-800 dark:border-red-800 dark:border-l-red-500",
+        "dark:bg-red-950 dark:text-red-300",
+      ].join(" ");
+    default:
+      return [
+        base,
+        "border border-l-4 border-l-zinc-500 border-zinc-800 bg-zinc-900 text-zinc-50",
+        "dark:border-zinc-300 dark:border-l-zinc-400 dark:bg-zinc-100 dark:text-zinc-900",
+      ].join(" ");
+  }
+}
+
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
-  const showToast = useCallback((message: string) => {
-    const id =
-      globalThis.crypto?.randomUUID?.() ?? `toast-${Date.now()}-${Math.random()}`;
+  const showToast = useCallback(
+    (message: string, kind: ToastKind = "default") => {
+      const id =
+        globalThis.crypto?.randomUUID?.() ?? `toast-${Date.now()}-${Math.random()}`;
 
-    setToasts((prev) => [...prev, { id, message, exiting: false }]);
+      setToasts((prev) => [...prev, { id, message, exiting: false, kind }]);
 
-    window.setTimeout(() => {
-      setToasts((prev) =>
-        prev.map((t) => (t.id === id ? { ...t, exiting: true } : t))
-      );
-    }, VISIBLE_MS);
-  }, []);
+      window.setTimeout(() => {
+        setToasts((prev) =>
+          prev.map((t) => (t.id === id ? { ...t, exiting: true } : t))
+        );
+      }, VISIBLE_MS);
+    },
+    []
+  );
 
   const onToastAnimationEnd = useCallback(
     (e: AnimationEvent<HTMLDivElement>, toast: Toast) => {
@@ -74,21 +110,15 @@ export function ToastProvider({ children }: { children: ReactNode }) {
             key={toast.id}
             role="status"
             onAnimationEnd={(e) => onToastAnimationEnd(e, toast)}
-            className={[
-              "pointer-events-auto relative w-full overflow-hidden rounded-xl",
-              "border border-zinc-200/90 bg-white/95 text-zinc-800",
-              "dark:border-zinc-600/90 dark:bg-zinc-900/95 dark:text-zinc-100",
-              "border-l-[3px] border-l-violet-500 pl-2.5 pr-3.5 dark:border-l-violet-400",
-              "toast-surface p-2.5",
-              toast.exiting ? "toast-anim-out" : "toast-anim-in",
-            ].join(" ")}
+            className={toastKindClasses(toast.kind, toast.exiting)}
             style={
               !toast.exiting
                 ? { animationDelay: `${Math.min(index, 4) * 0.04}s` }
                 : undefined
             }
           >
-            {!toast.exiting ? (
+            {!toast.exiting &&
+            (toast.kind === "success" || toast.kind === "destructive") ? (
               <div className="toast-sheen-wrap" aria-hidden>
                 <div
                   className="toast-sheen-bar"

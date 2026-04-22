@@ -17,21 +17,43 @@ export function formatDueDate(isoDate: string): string {
 export function priorityBadgeClass(priority: TaskPriority): string {
   switch (priority) {
     case "low":
-      return "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300";
+      return "bg-sky-100 text-sky-600 dark:bg-sky-900/40 dark:text-sky-400";
     case "medium":
-      return "bg-amber-100 text-amber-900 dark:bg-amber-950/50 dark:text-amber-200";
+      return "bg-orange-100 text-orange-600 dark:bg-orange-900/40 dark:text-orange-400";
     case "high":
-      return "bg-rose-100 text-rose-900 dark:bg-rose-950/50 dark:text-rose-200";
+      return "bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-400";
     default:
       return "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200";
   }
 }
 
-export function taskCardBaseClass(completed: boolean): string {
-  return [
-    "rounded-xl border bg-white transition-shadow dark:bg-zinc-900/40",
+function taskCardPriorityBorder(priority: TaskPriority): string {
+  switch (priority) {
+    case "high":
+      return "border-l-4 border-l-red-400";
+    case "medium":
+      return "border-l-4 border-l-orange-400";
+    case "low":
+      return "border-l-4 border-l-sky-400";
+    default:
+      return "";
+  }
+}
+
+/** List layout: no side accent. Card layout: left accent by task priority. */
+export function taskCardBaseClass(
+  completed: boolean,
+  priority: TaskPriority,
+  layout: "list" | "card",
+): string {
+  const base = [
+    "rounded-xl border border-zinc-200 bg-white transition-shadow dark:border-zinc-800 dark:bg-zinc-900",
     completed
-      ? "border-zinc-200 opacity-90 dark:border-zinc-800"
-      : "border-zinc-200 shadow-sm dark:border-zinc-800",
-  ].join(" ");
+      ? "opacity-90"
+      : "shadow-sm",
+  ];
+  if (layout === "card") {
+    base.push(taskCardPriorityBorder(priority));
+  }
+  return base.join(" ");
 }

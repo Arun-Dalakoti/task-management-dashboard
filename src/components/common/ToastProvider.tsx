@@ -99,7 +99,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     <ToastContext.Provider value={value}>
       {children}
       <div
-        className="pointer-events-none fixed right-0 top-0 z-[100] flex max-h-dvh w-full flex-col items-end justify-start gap-2 p-4 sm:right-2 sm:top-2 sm:max-w-md sm:p-6"
+        className="pointer-events-none fixed bottom-0 right-0 z-[100] flex max-h-dvh w-full flex-col items-end justify-end gap-2 p-4 sm:bottom-auto sm:right-2 sm:top-2 sm:max-w-md sm:flex-col sm:justify-start sm:p-6"
         aria-live="polite"
         aria-relevant="additions"
       >

@@ -1,8 +1,6 @@
 import {
   createContext,
-  useCallback,
   useContext,
-  useMemo,
   useState,
   type AnimationEvent,
   type ReactNode,
@@ -68,32 +66,26 @@ function toastKindClasses(kind: ToastKind, exiting: boolean): string {
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
-  const showToast = useCallback(
-    (message: string, kind: ToastKind = "default") => {
-      const id =
-        globalThis.crypto?.randomUUID?.() ?? `toast-${Date.now()}-${Math.random()}`;
+  const showToast = (message: string, kind: ToastKind = "default") => {
+    const id =
+      globalThis.crypto?.randomUUID?.() ?? `toast-${Date.now()}-${Math.random()}`;
 
-      setToasts((prev) => [...prev, { id, message, exiting: false, kind }]);
+    setToasts((prev) => [...prev, { id, message, exiting: false, kind }]);
 
-      window.setTimeout(() => {
-        setToasts((prev) =>
-          prev.map((t) => (t.id === id ? { ...t, exiting: true } : t))
-        );
-      }, VISIBLE_MS);
-    },
-    []
-  );
+    window.setTimeout(() => {
+      setToasts((prev) =>
+        prev.map((t) => (t.id === id ? { ...t, exiting: true } : t))
+      );
+    }, VISIBLE_MS);
+  };
 
-  const onToastAnimationEnd = useCallback(
-    (e: AnimationEvent<HTMLDivElement>, toast: Toast) => {
-      if (!toast.exiting || !exitAnimationNameOk(e.animationName)) return;
-      if (e.target !== e.currentTarget) return;
-      setToasts((prev) => prev.filter((t) => t.id !== toast.id));
-    },
-    []
-  );
+  const onToastAnimationEnd = (e: AnimationEvent<HTMLDivElement>, toast: Toast) => {
+    if (!toast.exiting || !exitAnimationNameOk(e.animationName)) return;
+    if (e.target !== e.currentTarget) return;
+    setToasts((prev) => prev.filter((t) => t.id !== toast.id));
+  };
 
-  const value = useMemo(() => ({ showToast }), [showToast]);
+  const value = { showToast };
 
   return (
     <ToastContext.Provider value={value}>

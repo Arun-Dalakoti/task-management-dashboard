@@ -1,5 +1,4 @@
 import {
-  useCallback,
   useEffect,
   useId,
   useRef,
@@ -58,13 +57,13 @@ export function Modal({ isOpen, title, onClose, children }: ModalProps) {
     window.requestAnimationFrame(() => el?.focus());
   }, [mounted, exiting, isOpen]);
 
-  const onPanelAnimationEnd = useCallback((e: AnimationEvent<HTMLDivElement>) => {
+  const onPanelAnimationEnd = (e: AnimationEvent<HTMLDivElement>) => {
     if (e.target !== e.currentTarget) return;
     if (exiting) {
       setMounted(false);
       setExiting(false);
     }
-  }, [exiting]);
+  };
 
   if (!mounted) return null;
 

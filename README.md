@@ -108,6 +108,9 @@ The `dist/` folder is a fully static site — no server required.
 ## Features
 
 - Create, edit, and delete tasks with title, description, priority, and due date
+  <img width="1723" height="949" alt="Screenshot 2026-04-23 at 8 24 53 AM" src="https://github.com/user-attachments/assets/ec1199fd-9c5b-452f-bcfd-3aaac5da8eca" />
+
+
 - Mark tasks as completed / pending
 - Filter by search text, status (All / Pending / Completed), and priority
 - List view and card grid view (card view available on wider screens)

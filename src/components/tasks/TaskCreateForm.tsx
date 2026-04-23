@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { Button, Field, Input, Select, TextArea } from "../common";
 import {
   TASK_PRIORITIES,
@@ -81,9 +81,7 @@ export function TaskCreateForm({
       noValidate
     >
       {embedded ? null : (
-        <h2 className="mb-6 text-lg font-semibold text-fg">
-          New task
-        </h2>
+        <h2 className="mb-6 text-lg font-semibold text-fg">New task</h2>
       )}
 
       <Field label="Title" htmlFor="task-title" error={errors.title}>

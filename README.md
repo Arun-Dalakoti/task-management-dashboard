@@ -107,18 +107,32 @@ The `dist/` folder is a fully static site — no server required.
 
 ## Features
 
-- Create, edit, and delete tasks with title, description, priority, and due date
+- Create, edit, and delete tasks with title, description, priority, and due date with both light and dark mode
   <img width="1723" height="949" alt="Screenshot 2026-04-23 at 8 24 53 AM" src="https://github.com/user-attachments/assets/ec1199fd-9c5b-452f-bcfd-3aaac5da8eca" />
 
+  <img width="1728" height="950" alt="Screenshot 2026-04-23 at 8 25 20 AM" src="https://github.com/user-attachments/assets/f887b0ba-2eea-4c7d-adf1-e96d57839b29" />
 
 - Mark tasks as completed / pending
+  <img width="1723" height="916" alt="Screenshot 2026-04-23 at 8 28 18 AM" src="https://github.com/user-attachments/assets/d1320431-574e-4e7d-adf8-b32c78abcd26" />
+
 - Filter by search text, status (All / Pending / Completed), and priority
+  <img width="1728" height="919" alt="Screenshot 2026-04-23 at 8 30 08 AM" src="https://github.com/user-attachments/assets/09e62319-d87c-4ff6-92d1-854cfc5e2f2c" />
+
 - List view and card grid view (card view available on wider screens)
+  <img width="1728" height="898" alt="Screenshot 2026-04-23 at 8 30 36 AM" src="https://github.com/user-attachments/assets/469a4eea-3459-42bb-bf8c-c1b259917520" />
+
 - Light and dark mode with a toggle — preference persisted to `localStorage`
 - Tasks persisted to `localStorage`; tabs stay in sync via the `storage` event
 - Toast notifications for create, edit, delete, and status-change actions
+  <img width="1726" height="961" alt="Screenshot 2026-04-23 at 8 32 28 AM" src="https://github.com/user-attachments/assets/657e1d6a-58e7-4367-9888-3e971c718463" />
+  <img width="1728" height="915" alt="Screenshot 2026-04-23 at 8 33 04 AM" src="https://github.com/user-attachments/assets/82048e5f-3ee3-43f7-9c2c-e48cc668835c" />
+
 - Fully keyboard-accessible modals and filter panel (Escape to close, focus trap)
 - Entrance animations on task cards and list rows; respects `prefers-reduced-motion`
+- Mobile Screensorts:
+  <img width="382" height="821" alt="Screenshot 2026-04-23 at 8 31 42 AM" src="https://github.com/user-attachments/assets/3d4f8b2c-8ad7-4f09-983d-733a1d04724b" />
+<img width="380" height="818" alt="Screenshot 2026-04-23 at 8 31 31 AM" src="https://github.com/user-attachments/assets/0b2bd138-fed0-4112-8258-06259310a42e" />
+
 
 ---
 
